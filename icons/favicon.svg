@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#18181b"/>
+  <rect x="36" y="36" width="440" height="440" rx="84" fill="none" stroke="#f7f6f2" stroke-opacity="0.12" stroke-width="4"/>
+  <!-- Open book & globe-inspired editorial emblem -->
+  <path d="M128 156c44 0 84 14 128 42 44-28 84-42 128-42v188c-44 0-84 14-128 42-44-28-84-42-128-42V156z" fill="none" stroke="#f7f6f2" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="256" y1="198" x2="256" y2="386" stroke="#f7f6f2" stroke-width="24" stroke-linecap="round"/>
+  <!-- Emerald check accent badge -->
+  <circle cx="372" cy="148" r="54" fill="#22c55e"/>
+  <polyline points="348 149 365 166 398 132" fill="none" stroke="#0e0e10" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

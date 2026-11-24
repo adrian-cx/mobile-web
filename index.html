@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-font="md">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <title>国际商务导论 · 随身刷题</title>
+  <meta name="description" content="国际商务导论移动刷题 H5 / PWA，内置 12 章 63 节 288 题完整题库与解析，支持练习、背题、模考、错题本与离线使用。" />
+
+  <!-- PWA & iOS Safari Standalone Meta -->
+  <meta name="theme-color" content="#f7f6f2" id="meta-theme-color" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="商务刷题" />
+  <meta name="format-detection" content="telephone=no, email=no" />
+
+  <!-- Relative Paths for Subpath / GitHub Pages Compatibility -->
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="./icons/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png" />
+  <link rel="stylesheet" href="./css/app.css" />
+</head>
+<body>
+  <!-- Sticky Top App Header -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand-wrap">
+        <div class="brand-row">
+          <span class="brand-title">国际商务导论</span>
+          <span class="offline-badge" id="offline-badge">离线模式</span>
+        </div>
+        <span class="brand-meta" id="brand-meta">12章 · 288题</span>
+      </div>
+
+      <nav class="mode-seg" aria-label="刷题模式">
+        <button class="mode-seg-btn active" type="button" data-mode="practice">练习</button>
+        <button class="mode-seg-btn" type="button" data-mode="recite">背题</button>
+        <button class="mode-seg-btn" type="button" data-mode="exam">模考</button>
+      </nav>
+
+      <div class="header-tools">
+        <button class="icon-btn" id="btn-install" type="button" aria-label="添加到主屏幕" title="添加到主屏幕">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2.5"/><line x1="12" y1="18" x2="12.01" y2="18"/><path d="M12 7v6"/><polyline points="9.5 10.5 12 13 14.5 10.5"/></svg>
+        </button>
+        <button class="icon-btn" id="btn-theme" type="button" aria-label="切换深浅色" title="切换深浅色">
+          <svg id="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg id="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="icon-btn" id="btn-manage" type="button" aria-label="进度备份与管理" title="进度备份与管理">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.08a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.08a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.08a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Exam Running Bar -->
+    <div class="exam-bar" id="exam-bar">
+      <div class="timer-badge" id="exam-timer-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
+        <span id="exam-timer-text">00:00</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button class="btn btn-secondary btn-sm" id="btn-exam-quit" type="button">退出</button>
+        <button class="btn btn-primary btn-sm" id="btn-exam-submit-top" type="button">交卷判分</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sub-Toolbar: Views, Chapter Picker, Filters & Search -->
+  <section class="sub-toolbar" id="sub-toolbar">
+    <div class="view-tabs-row" id="view-tabs">
+      <button class="view-pill active" type="button" data-view="all">全部 <span class="view-pill-cnt" id="cnt-all">288</span></button>
+      <button class="view-pill" type="button" data-view="wrong">错题本 <span class="view-pill-cnt" id="cnt-wrong">0</span></button>
+      <button class="view-pill" type="button" data-view="favorite">收藏 <span class="view-pill-cnt" id="cnt-fav">0</span></button>
+      <button class="view-pill" type="button" data-view="disputed">争议 † <span class="view-pill-cnt" id="cnt-disputed">0</span></button>
+    </div>
+
+    <div class="filter-strip">
+      <button class="filter-btn chapter-btn" id="btn-open-chapters" type="button">
+        <span style="display:flex;align-items:center;gap:6px;min-width:0;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <span class="filter-btn-txt" id="chapter-btn-label">全部章节</span>
+        </span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+
+      <button class="filter-btn" id="btn-open-filters" type="button">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+        <span id="filter-btn-label">筛选</span>
+      </button>
+
+      <button class="filter-btn" id="btn-toggle-search" type="button" aria-label="搜索题目">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+    </div>
+
+    <div class="search-bar-wrap" id="search-bar-wrap">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-3)"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="search-input" id="search-input" type="search" placeholder="搜索题干、选项或解析关键词..." autocomplete="off" />
+      <button class="text-link-btn" id="btn-clear-search" type="button">关闭</button>
+    </div>
+
+    <div class="active-filter-banner" id="active-filter-banner">
+      <span id="filter-status-text">共 288 题</span>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button class="text-link-btn" id="btn-banner-reshuffle" type="button" style="display:none">洗牌</button>
+        <button class="text-link-btn" id="btn-banner-reset-wrong" type="button" style="display:none">重刷错题</button>
+        <button class="text-link-btn" id="btn-banner-clear" type="button" style="display:none">清除筛选</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Interactive Question / Exam Stage -->
+  <main class="main-stage" id="stage"></main>
+
+  <!-- Fixed Thumb-Zone Bottom Action Bar -->
+  <footer class="bottom-bar" id="bottom-bar">
+    <div class="bottom-bar-inner">
+      <button class="nav-btn prev" id="btn-prev" type="button">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        <span>上一题</span>
+      </button>
+
+      <button class="fav-dock-btn" id="btn-fav-dock" type="button" aria-label="收藏本题">
+        <svg id="dock-star-icon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </button>
+
+      <button class="sheet-dock-btn" id="btn-open-sheet" type="button" aria-label="展开答题卡">
+        <div class="sheet-dock-top">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+          <span id="dock-progress-text">1/288</span>
+        </div>
+        <div class="sheet-dock-track">
+          <div class="sheet-dock-fill" id="dock-progress-fill" style="width:0%"></div>
+        </div>
+      </button>
+
+      <button class="nav-btn next" id="btn-next" type="button">
+        <span id="btn-next-label">下一题</span>
+        <svg id="btn-next-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </footer>
+
+  <!-- Shared Backdrop -->
+  <div class="backdrop" id="backdrop"></div>
+
+  <!-- 1. Answer Sheet Bottom Drawer -->
+  <aside class="bottom-sheet" id="sheet-answers" role="dialog" aria-modal="true" aria-label="答题卡">
+    <div class="sheet-handle"></div>
+    <div class="sheet-top">
+      <span class="sheet-title" id="ans-sheet-title">答题卡</span>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button class="btn btn-primary btn-sm" id="btn-sheet-submit-exam" type="button" style="display:none">交卷判分</button>
+        <button class="icon-btn" type="button" data-close-sheet aria-label="关闭">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="sheet-scroll" id="ans-sheet-body"></div>
+  </aside>
+
+  <!-- 2. Chapter & Section Picker Bottom Drawer -->
+  <aside class="bottom-sheet" id="sheet-chapters" role="dialog" aria-modal="true" aria-label="选择章节">
+    <div class="sheet-handle"></div>
+    <div class="sheet-top">
+      <span class="sheet-title">选择章节与小节</span>
+      <button class="icon-btn" type="button" data-close-sheet aria-label="关闭">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="chapter-search-box">
+      <div class="search-bar-wrap open" style="height:38px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-3)"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input class="search-input" id="chapter-search-input" type="search" placeholder="快速定位章节或小节..." autocomplete="off" />
+      </div>
+    </div>
+    <div class="sheet-scroll" id="chapter-list-body"></div>
+  </aside>
+
+  <!-- 3. Filter & Study Preferences Bottom Drawer -->
+  <aside class="bottom-sheet" id="sheet-filters" role="dialog" aria-modal="true" aria-label="筛选与刷题设置">
+    <div class="sheet-handle"></div>
+    <div class="sheet-top">
+      <span class="sheet-title">筛选与刷题偏好</span>
+      <button class="icon-btn" type="button" data-close-sheet aria-label="关闭">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="sheet-scroll" id="filters-sheet-body"></div>
+  </aside>
+
+  <!-- 4. Progress Backup / Import / Reset Bottom Drawer -->
+  <aside class="bottom-sheet" id="sheet-manage" role="dialog" aria-modal="true" aria-label="进度备份与管理">
+    <div class="sheet-handle"></div>
+    <div class="sheet-top">
+      <span class="sheet-title">学习记录与备份</span>
+      <button class="icon-btn" type="button" data-close-sheet aria-label="关闭">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="sheet-scroll" id="manage-sheet-body"></div>
+    <input type="file" id="import-json-file" accept=".json,application/json" style="display:none" />
+  </aside>
+
+  <!-- 5. Add to Home Screen (PWA) Guide Drawer -->
+  <aside class="bottom-sheet" id="sheet-install" role="dialog" aria-modal="true" aria-label="添加到手机桌面">
+    <div class="sheet-handle"></div>
+    <div class="sheet-top">
+      <span class="sheet-title">添加到手机主屏幕</span>
+      <button class="icon-btn" type="button" data-close-sheet aria-label="关闭">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="sheet-scroll" id="install-sheet-body"></div>
+  </aside>
+
+  <!-- 6. Inline Confirm Sheet (Never blocked by WebViews) -->
+  <aside class="bottom-sheet" id="sheet-confirm" role="dialog" aria-modal="true">
+    <div class="sheet-handle"></div>
+    <div class="sheet-top">
+      <span class="sheet-title" id="confirm-title">请确认</span>
+      <button class="icon-btn" type="button" data-close-sheet aria-label="关闭">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="sheet-scroll">
+      <p id="confirm-desc" style="font-size:14px;color:var(--text-2);line-height:1.6;margin-bottom:18px;"></p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <button class="btn btn-secondary" type="button" data-close-sheet>取消</button>
+        <button class="btn btn-primary" id="btn-confirm-ok" type="button">确定</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Toast Feedback -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Pure Static Scripts (Relative Paths) -->
+  <script src="./js/questions.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
